@@ -1,0 +1,13 @@
+{{- if .Values.elasticSearch.enabled }}
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: {{ .Values.global.elasticsearchName }}
+spec:
+  version: 8.8.1
+  nodeSets:
+    - name: {{ .Values.elasticSearch.nodeSets.name }}
+      count: {{ .Values.elasticSearch.nodeSets.count }}
+      config:
+        node.store.allow_mmap: {{ .Values.elasticSearch.nodeConfig.allowMmap }}
+{{- end }}

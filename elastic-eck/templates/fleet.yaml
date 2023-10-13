@@ -1,0 +1,24 @@
+{{- if .Values.fleetServer.enabled }}
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: {{ .Values.fleetServer.name }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  version: 8.8.1
+  kibanaRef:
+    name: {{ .Values.global.kibanaName }}
+  elasticsearchRefs:
+    - name: {{ .Values.global.elasticsearchName }}
+  mode: {{ .Values.global.agentMode }}
+  fleetServerEnabled: true
+  policyID: eck-fleet-server
+  deployment:
+    replicas: {{ .Values.fleetServer.replicas }}
+    podTemplate:
+      spec:
+        serviceAccountName: {{ .Values.elasticAgent.name }}
+        automountServiceAccountToken: true
+        securityContext:
+          runAsUser: 0
+  {{- end }}

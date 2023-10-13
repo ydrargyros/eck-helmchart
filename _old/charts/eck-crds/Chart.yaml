@@ -1,0 +1,8 @@
+apiVersion: v2
+name: eck-crds
+description: CRDs for ECK
+type: application
+version: 1.0.0
+appVersion: "8.8.1"
+annotations:
+  helm.sh/hook: pre-install

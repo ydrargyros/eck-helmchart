@@ -1,0 +1,46 @@
+# Things that need to be added
+#TODO Global property for naming of major components Kibana, Elasticsearch, APM server, Fleet server
+#[DONE] Enable/Disable per subcomponent (keep gitops app-of-apps into mind)
+#[DONE] Global property for URLS in Elasticsearch: ACHTUNG! Mann kann nicht "elasticsearch" name reservieren,
+#TODO Add ingress template for Kibana with TLS support and enable/disable ingress and TLS
+#TODO Add multiple agents and aggregate logs/metrics
+#TODO Add index generation and ILM configuration for Agents (see SWPD\cdp-tooling)
+#TODO
+
+global:
+  namespace: eck-poc
+  kibanaName: kibana
+  elasticsearchName: elastic
+  agentMode: standalone
+#  agentMode: fleet
+
+kibana:
+  enabled: true
+  replicaCount: 3
+
+elasticSearch:
+  enabled: true
+  nodeSets:
+    name: default
+    count: 3
+  nodeConfig:
+    allowMmap: false
+
+fleetServer:
+  enabled: false
+  name: fleet-server
+  replicas: 1
+
+apmServer:
+  enabled: true
+  nodeSetsCount: 1
+
+elasticAgent:
+  enabled: false
+  name: elastic-agent
+#  Add full configuration so as to segregate environments and ways of distributing logs
+#  Add full configuration so as to segregate environments and ways of distributing metrics
+
+#logstash:
+#  enabled:
+#
