@@ -161,8 +161,14 @@ eck-agent:
 # If enabled, will use the eck-fleet-server chart and deploy a Fleet Server resource.
 #
 eck-fleet-server:
-  enabled: false
-
+  enabled: true
+  annotations:
+    eck.k8s.elastic.co/license: basic
+  spec:
+    kibanaRef:
+      name: es-eck-kibana
+    elasticsearchRefs:
+      - name: elasticsearch
 # If enabled, will use the eck-beats chart and deploy a Beats resource.
 #
 eck-beats:
